@@ -36,13 +36,13 @@ public class ForgotPassword_Fragment extends Fragment implements
 		return view;
 	}
 
-	// Initialize the views
+	// เริ่มต้นมุมมอง
 	private void initViews() {
 		emailId = (EditText) view.findViewById(R.id.registered_emailid);
 		submit = (TextView) view.findViewById(R.id.forgot_button);
 		back = (TextView) view.findViewById(R.id.backToLoginBtn);
 
-		// Setting text selector over textviews
+		//การตั้งค่าตัวเลือกข้อความผ่านการแสดงข้อความ
 		XmlResourceParser xrp = getResources().getXml(R.drawable.text_selector);
 		try {
 			ColorStateList csl = ColorStateList.createFromXml(getResources(),
@@ -81,29 +81,30 @@ public class ForgotPassword_Fragment extends Fragment implements
 
 	}
 
+//	ตรงนี้สำคัญ
 	private void submitButtonTask() {
 		String getEmailId = emailId.getText().toString();
 
-		// Pattern for email id validation
+		// รูปแบบสำหรับการตรวจสอบรหัสอีเมล
 		Pattern p = Pattern.compile(Utils.regEx);
 
-		// Match the pattern
+		// ตรงกับรูปแบบ
 		Matcher m = p.matcher(getEmailId);
 
-		// First check if email id is not null else show error toast
+		// ก่อนอื่นตรวจสอบว่ารหัสอีเมลไม่ใช่โมฆะมิฉะนั้นจะแสดงว่ามีข้อผิดพลาด
 		if (getEmailId.equals("") || getEmailId.length() == 0)
 
 			new CustomToast().Show_Toast(getActivity(), view,
-					"Please enter your Email Id.");
+					"กรุณาใส่รหัสอีเมลของคุณ");
 
-		// Check if email id is valid or not
+		// ตรวจสอบว่ารหัสอีเมลถูกต้องหรือไม่
 		else if (!m.find())
 			new CustomToast().Show_Toast(getActivity(), view,
-					"Your Email Id is Invalid.");
+					"รหัสอีเมลของคุณไม่ถูกต้อง");
 
-		// Else submit email id and fetch passwod or do your stuff
+		// อื่นส่งรหัสอีเมลและดึงรหัสผ่านหรือทำสิ่งที่คุณ
 		else
-			Toast.makeText(getActivity(), "Get Forgot Password.",
+			Toast.makeText(getActivity(), "ลืมรหัสผ่าน",
 					Toast.LENGTH_SHORT).show();
 	}
 }
